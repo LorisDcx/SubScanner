@@ -1,6 +1,7 @@
 export type User = {
   id: string;
   email: string;
+  plan?: string;
 };
 
 export type Account = {
