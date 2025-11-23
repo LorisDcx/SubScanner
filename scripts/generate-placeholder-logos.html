@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de logos placeholder</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        h1 {
+            color: #38bdf8;
+            margin-bottom: 2rem;
+        }
+        .controls {
+            background: #1e293b;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        button {
+            background: #38bdf8;
+            color: #0f172a;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        button:hover {
+            background: #0ea5e9;
+        }
+        .preview {
+            background: #1e293b;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        canvas {
+            border: 2px solid #334155;
+            border-radius: 8px;
+            max-width: 100%;
+        }
+        .download-section {
+            margin-top: 1rem;
+        }
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .color-option {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .color-option:hover {
+            border-color: #38bdf8;
+        }
+        .color-option.selected {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px #38bdf8;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 Générateur de logos placeholder</h1>
+    
+    <div class="controls">
+        <div class="form-group">
+            <label for="brandName">Nom de la marque :</label>
+            <input type="text" id="brandName" placeholder="Ex: Netflix, Spotify, Amazon..." value="Netflix">
+        </div>
+        
+        <div class="form-group">
+            <label>Couleur :</label>
+            <div class="color-grid" id="colorGrid"></div>
+        </div>
+        
+        <div class="form-group">
+            <label for="size">Taille (px) :</label>
+            <select id="size">
+                <option value="64">64x64</option>
+                <option value="128" selected>128x128</option>
+                <option value="256">256x256</option>
+                <option value="512">512x512</option>
+            </select>
+        </div>
+        
+        <button onclick="generateLogo()">Générer le logo</button>
+    </div>
+    
+    <div class="preview">
+        <canvas id="canvas"></canvas>
+        <div class="download-section">
+            <button onclick="downloadLogo()">📥 Télécharger le logo</button>
+        </div>
+    </div>
+
+    <script>
+        const brandColors = {
+            'Netflix': '#E50914',
+            'Spotify': '#1DB954',
+            'Amazon': '#FF9900',
+            'Disney': '#113CCF',
+            'YouTube': '#FF0000',
+            'Canal': '#000000',
+            'Orange': '#FF7900',
+            'SFR': '#E4032E',
+            'Free': '#CC0001',
+            'Bouygues': '#009FC5',
+            'Apple': '#000000',
+            'Google': '#4285F4',
+            'Microsoft': '#00A4EF',
+            'LinkedIn': '#0077B5',
+            'Adobe': '#FF0000',
+            'Uber': '#000000',
+        };
+
+        const defaultColors = [
+            '#E50914', '#1DB954', '#FF9900', '#113CCF', 
+            '#FF0000', '#000000', '#FF7900', '#E4032E',
+            '#CC0001', '#009FC5', '#0077B5', '#00A4EF',
+            '#8B5CF6', '#EC4899', '#F59E0B', '#10B981',
+        ];
+
+        let selectedColor = '#E50914';
+
+        function initColorGrid() {
+            const grid = document.getElementById('colorGrid');
+            defaultColors.forEach((color, index) => {
+                const div = document.createElement('div');
+                div.className = 'color-option' + (index === 0 ? ' selected' : '');
+                div.style.backgroundColor = color;
+                div.onclick = () => selectColor(color, div);
+                grid.appendChild(div);
+            });
+        }
+
+        function selectColor(color, element) {
+            document.querySelectorAll('.color-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            selectedColor = color;
+            generateLogo();
+        }
+
+        function getInitials(name) {
+            return name
+                .split(' ')
+                .slice(0, 2)
+                .map(word => word[0])
+                .join('')
+                .toUpperCase();
+        }
+
+        function generateLogo() {
+            const brandName = document.getElementById('brandName').value || 'AB';
+            const size = parseInt(document.getElementById('size').value);
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Detect brand color
+            const detectedColor = brandColors[brandName];
+            if (detectedColor && selectedColor === '#E50914') {
+                selectedColor = detectedColor;
+                updateColorSelection(detectedColor);
+            }
+            
+            canvas.width = size;
+            canvas.height = size;
+            
+            // Background circle
+            ctx.fillStyle = selectedColor;
+            ctx.beginPath();
+            ctx.arc(size / 2, size / 2, size / 2, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Initials
+            const initials = getInitials(brandName);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = `bold ${size * 0.4}px system-ui, -apple-system, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(initials, size / 2, size / 2);
+        }
+
+        function updateColorSelection(color) {
+            const colorOptions = document.querySelectorAll('.color-option');
+            colorOptions.forEach((option, index) => {
+                if (defaultColors[index] === color) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+        }
+
+        function downloadLogo() {
+            const brandName = document.getElementById('brandName').value || 'brand';
+            const canvas = document.getElementById('canvas');
+            const filename = brandName.toLowerCase().replace(/\s+/g, '-') + '.png';
+            
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+        }
+
+        // Auto-generate on input change
+        document.getElementById('brandName').addEventListener('input', generateLogo);
+        document.getElementById('size').addEventListener('change', generateLogo);
+
+        // Initialize
+        initColorGrid();
+        generateLogo();
+    </script>
+</body>
+</html>
