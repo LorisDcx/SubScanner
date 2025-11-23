@@ -5,6 +5,11 @@ import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 
 function loadServiceAccount(): ServiceAccount {
+  if (process.env.FIREBASE_ADMIN_KEY_BASE64) {
+    const decoded = Buffer.from(process.env.FIREBASE_ADMIN_KEY_BASE64, "base64").toString("utf-8");
+    return JSON.parse(decoded);
+  }
+
   if (process.env.FIREBASE_ADMIN_KEY) {
     return JSON.parse(process.env.FIREBASE_ADMIN_KEY);
   }
@@ -18,7 +23,7 @@ function loadServiceAccount(): ServiceAccount {
     return JSON.parse(file);
   }
 
-  throw new Error("Missing Firebase admin credentials. Set FIREBASE_ADMIN_KEY or FIREBASE_ADMIN_KEY_PATH.");
+  throw new Error("Missing Firebase admin credentials. Set FIREBASE_ADMIN_KEY_BASE64, FIREBASE_ADMIN_KEY or FIREBASE_ADMIN_KEY_PATH.");
 }
 
 const serviceAccount = loadServiceAccount();
