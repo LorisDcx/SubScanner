@@ -1,16 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { auth } from "@/lib/firebase";
 import { CsvUploadZone } from "@/components/CsvUploadZone";
 import { AnalysisSummary } from "@/components/AnalysisSummary";
 import { SubscriptionsTable } from "@/components/SubscriptionsTable";
 import { PlanSavingsBar } from "@/components/PlanSavingsBar";
-import { SupportUsCard } from "@/components/SupportUsCard";
 import { AnalysisResult, SubscriptionTag } from "@/types/analysis";
 import { SUPPORT_URL } from "@/config/support";
+import { SiteHeader } from "@/components/SiteHeader";
 
 const MIN_LOADING_DURATION_MS = 5000;
 
@@ -165,57 +164,7 @@ export default function AnalyzePage() {
         <div className="absolute top-1/2 -left-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
       </div>
 
-      {/* Navigation Header */}
-      <header className="relative border-b border-slate-800/50 backdrop-blur-sm z-10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-slate-950 font-bold text-sm group-hover:scale-110 transition-transform">
-                S
-              </div>
-              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
-                SubScanner
-              </span>
-            </Link>
-            <Link 
-              href="/" 
-              className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors group"
-            >
-              <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              <span>Retour</span>
-            </Link>
-          </div>
-          <nav className="flex items-center gap-6 text-sm">
-            {user ? (
-              <>
-                <Link href="/dashboard" className="text-slate-300 hover:text-white transition-colors font-medium">
-                  Dashboard
-                </Link>
-                <Link
-                  href="/dashboard"
-                  className="relative rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-5 py-2 text-sm font-semibold text-white hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 hover:scale-105"
-                >
-                  Mon compte
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link href="/login" className="text-slate-400 hover:text-white transition-colors">
-                  Connexion
-                </Link>
-                <Link
-                  href="/signup"
-                  className="relative rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-5 py-2 text-sm font-semibold text-white hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 hover:scale-105"
-                >
-                  Créer un compte
-                </Link>
-              </>
-            )}
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
       
       <main className="relative mx-auto flex max-w-7xl flex-col gap-16 px-6 py-12 pb-24">
         {/* Hero Header */}
@@ -376,7 +325,6 @@ export default function AnalyzePage() {
                 <div className="space-y-6">
                   <AnalysisSummary analysis={analysis} />
                   <PlanSavingsBar selectedCount={selectedCount} yearlySavings={yearlySavings} />
-                  <SupportUsCard estimatedSavingsYearly={analysis.totalYearly} location="result_page" />
                 </div>
 
                 {/* CSV Action Buttons now at the end */}

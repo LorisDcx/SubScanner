@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { auth } from "@/lib/firebase";
 import { AnalysisResult } from "@/types/analysis";
+import { SiteHeader } from "@/components/SiteHeader";
 
 type StoredAnalysis = {
   id: string;
@@ -16,7 +17,7 @@ type StoredAnalysis = {
 };
 
 export default function DashboardPage() {
-  const { user, loading, signOut } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
   const [analyses, setAnalyses] = useState<StoredAnalysis[]>([]);
   const [loadingAnalyses, setLoadingAnalyses] = useState(true);
@@ -85,11 +86,6 @@ export default function DashboardPage() {
   useEffect(() => {
     setShowAllSubscriptions(false);
   }, [selectedIndex]);
-
-  const handleSignOut = async () => {
-    await signOut();
-    router.push("/");
-  };
 
   const selectedAnalysisEntry = analyses[selectedIndex];
   const selectedAnalysis = selectedAnalysisEntry?.analysis;
@@ -180,23 +176,7 @@ export default function DashboardPage() {
         <div className="absolute top-1/2 -left-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
       </div>
 
-      <header className="relative border-b border-slate-800/50 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-slate-950 font-bold text-sm">
-              S
-            </div>
-            <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
-              SubScanner
-            </span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <button onClick={handleSignOut} className="text-sm text-slate-400 hover:text-white transition-colors">
-              Déconnexion
-            </button>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="relative mx-auto max-w-6xl px-6 py-12 pb-24">
         <div className="mb-12">

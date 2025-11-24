@@ -1,11 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useAuth } from "@/context/AuthContext";
+import { SiteHeader } from "@/components/SiteHeader";
 
 export default function Home() {
-  const { user } = useAuth();
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-50">
       {/* Background decoration */}
@@ -15,51 +13,7 @@ export default function Home() {
         <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
       </div>
 
-      <header className="relative border-b border-slate-800/50 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-slate-950 font-bold text-sm">
-              S
-            </div>
-            <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
-              SubScanner
-            </span>
-          </Link>
-          <nav className="flex items-center gap-6 text-sm">
-            {user ? (
-              <>
-                <Link href="/dashboard" className="text-slate-300 hover:text-white transition-colors font-medium">
-                  Dashboard
-                </Link>
-                <Link href="/analyze" className="text-slate-400 hover:text-white transition-colors">
-                  Scanner
-                </Link>
-                <Link
-                  href="/dashboard"
-                  className="relative rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-5 py-2 text-sm font-semibold text-white hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 hover:scale-105"
-                >
-                  Mon compte
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link href="/analyze" className="text-slate-300 hover:text-white transition-colors font-medium">
-                  Scanner mon compte
-                </Link>
-                <Link href="/login" className="text-slate-400 hover:text-white transition-colors">
-                  Connexion
-                </Link>
-                <Link
-                  href="/signup"
-                  className="relative rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-5 py-2 text-sm font-semibold text-white hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 hover:scale-105"
-                >
-                  Créer un compte
-                </Link>
-              </>
-            )}
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="relative mx-auto max-w-7xl px-6 py-16 pb-24 space-y-32">
         {/* Hero Section - Centered */}
@@ -86,7 +40,7 @@ export default function Home() {
           </div>
           
           {/* CTA Section */}
-          <div className="space-y-6">
+          <div className="space-y-14">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/analyze"
@@ -100,6 +54,12 @@ export default function Home() {
                 </span>
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity blur" />
               </Link>
+              <Link
+                href="/tuto"
+                className="rounded-full border border-slate-700/70 px-10 py-5 text-sm font-semibold text-slate-100 hover:border-slate-500 hover:bg-slate-900/40 transition-all"
+              >
+                Comprendre le CSV parfait
+              </Link>
               <div className="flex items-center gap-2 text-sm text-slate-400">
                 <svg className="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -108,42 +68,61 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Trust Badges */}
-            <div className="flex flex-wrap items-center justify-center gap-8 pt-4">
-              <div className="flex items-center gap-2 text-sm text-slate-400">
-                <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-                <span>100% sécurisé</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-slate-400">
-                <svg className="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                <span>Analyse instantanée</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-slate-400">
-                <svg className="w-5 h-5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                <span>Données anonymes</span>
-              </div>
+            <p className="text-sm text-slate-400">
+              Première fois ? On t&apos;explique comment exporter un CSV propre depuis ta banque.
+            </p>
+          </div>
+
+          {/* Trust Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-8 pt-4">
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <span>100% sécurisé</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <svg className="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span>Analyse instantanée</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <svg className="w-5 h-5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <span>Données anonymes</span>
             </div>
           </div>
-          
-          {/* Stats */}
-          <div className="flex flex-wrap items-center justify-center gap-12 pt-8">
-            <div className="text-center">
-              <p className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">+2,500</p>
-              <p className="text-sm text-slate-500 mt-1">Utilisateurs actifs</p>
-            </div>
-            <div className="text-center">
-              <p className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">120k€</p>
-              <p className="text-sm text-slate-500 mt-1">Économisés au total</p>
-            </div>
-            <div className="text-center">
-              <p className="text-4xl font-bold bg-gradient-to-r from-violet-400 to-emerald-400 bg-clip-text text-transparent">&lt;30s</p>
-              <p className="text-sm text-slate-500 mt-1">Temps d'analyse</p>
+
+          {/* Transparency callout */}
+          <div className="pt-8">
+            <div className="relative max-w-3xl mx-auto rounded-2xl border border-slate-800/60 bg-slate-950/50 backdrop-blur-sm p-6">
+              <div className="flex flex-col gap-4 text-left">
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-300">
+                    ✨
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold text-white">Transparence totale</p>
+                    <p className="text-xs text-slate-400">SubScanner est en beta publique : on publiera des stats réelles, pas de vanity metrics.</p>
+                  </div>
+                </div>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Ce qui compte aujourd&apos;hui : te guider pour obtenir un CSV propre. Plus ton fichier est net, plus l&apos;analyse est fiable.
+                </p>
+                <div>
+                  <Link
+                    href="/tuto"
+                    className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 px-5 py-2 text-sm font-semibold text-emerald-200 hover:border-emerald-400 hover:bg-emerald-500/10 transition-all"
+                  >
+                    Lire le tuto CSV complet
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>

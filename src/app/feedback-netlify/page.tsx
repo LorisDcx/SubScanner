@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { SiteHeader } from "@/components/SiteHeader";
 
 type MessageType = "idea" | "support" | "complaint";
 
@@ -77,28 +77,7 @@ export default function FeedbackPage() {
         <div className="absolute top-1/2 -left-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
       </div>
 
-      {/* Header */}
-      <header className="relative border-b border-slate-800/50 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-slate-950 font-bold text-sm group-hover:scale-110 transition-transform">
-              S
-            </div>
-            <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
-              SubScanner
-            </span>
-          </Link>
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors group"
-          >
-            <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            <span>Retour</span>
-          </Link>
-        </div>
-      </header>
+      <SiteHeader />
 
       <div className="relative mx-auto max-w-4xl px-6 py-16">
         {/* Hero Section */}
