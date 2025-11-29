@@ -13,7 +13,7 @@ const faqs = [
     question: "Puis-je supprimer les colonnes sensibles avant ?",
     answer: (
       <>
-        Oui. Tu peux enlever les colonnes IBAN, solde ou adresse avant d&apos;uploader.
+        {"Oui. Tu peux enlever les colonnes IBAN, solde ou adresse avant d'uploader."}
         {" "}
         <Link href="/tuto" className="text-emerald-300 underline-offset-2 hover:text-emerald-200 hover:underline">
           On te montre la marche à suivre banque par banque.
@@ -23,11 +23,11 @@ const faqs = [
   },
   {
     question: "Est-ce que tu sauvegardes mon fichier ?",
-    answer: "Non. Le CSV est traité en mémoire, rien n&apos;est stocké côté serveur et tu pouvais fermer l&apos;onglet après l&apos;analyse.",
+    answer: "Non. Le CSV est traité en mémoire, rien n'est stocké côté serveur et tu pouvais fermer l'onglet après l'analyse.",
   },
   {
     question: "Pourquoi tu ne demandes pas de connexion bancaire ?",
-    answer: "Parce qu&apos;on veut t&apos;éviter la paperasse et garder un mode anonymisé. Tu restes totalement en contrôle du fichier que tu partages.",
+    answer: "Parce qu'on veut t'éviter la paperasse et garder un mode anonymisé. Tu restes totalement en contrôle du fichier que tu partages.",
   },
 ];
 
@@ -55,10 +55,10 @@ export default function Home() {
               100% gratuit · Aucune connexion bancaire
             </div>
             
-            <h1 className="text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl xl:text-8xl">
-              Scanne 6 mois de relevés,
-              <span className="block mt-3 bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">
-                trouve tous tes abonnements et vois combien tu peux économiser par an.
+            <h1 className="text-lg font-bold tracking-tight md:text-5xl lg:text-6xl xl:text-7xl">
+              Scanne ton relevé, démasque 
+              <span className="block mt-2 bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">
+             tous tes abonnements cachés en 30 secondes.
               </span>
             </h1>
             
@@ -67,7 +67,7 @@ export default function Home() {
             </p>
 
             <p className="text-base text-emerald-200">
-              En moyenne, les premiers utilisateurs récupèrent 48 € par mois d&apos;abonnements inutiles.
+              {"En moyenne, les premiers utilisateurs récupèrent 48 € par mois d'abonnements inutiles."}
             </p>
           </div>
           
@@ -146,7 +146,7 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  Ce qui compte aujourd&apos;hui : te guider pour obtenir un CSV propre. Plus ton fichier est net, plus l&apos;analyse est fiable.
+                  {"Ce qui compte aujourd'hui : te guider pour obtenir un CSV propre. Plus ton fichier est net, plus l'analyse est fiable."}
                 </p>
                 <div>
                   <Link
@@ -168,22 +168,21 @@ export default function Home() {
         <section className="relative max-w-5xl mx-auto">
           <div className="absolute -inset-1 rounded-[32px] bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-violet-500/20 blur-3xl opacity-50" />
           <div className="relative rounded-[32px] border border-slate-800/60 bg-slate-950/70 backdrop-blur-xl p-8 md:p-10 space-y-8">
-            <div className="space-y-4 text-center md:text-left">
+            <div className="space-y-3 text-center md:text-left">
               <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200 ring-1 ring-emerald-500/30">
                 Aperçu réel
               </div>
               <div className="space-y-3">
-                <h2 className="text-3xl font-bold text-white">À quoi ressemble le dashboard ?</h2>
-                <p className="text-base text-slate-400 max-w-2xl">
-                  Chaque abonnement détecté apparaît avec logo, libellé, montant mensuel/annuel et un tag &quot;À garder / À vérifier / À résilier&quot;.
-                  Tu vois immédiatement tes totaux mensuels/annuels et le plan d&apos;économies potentiel.
+                <h2 className="text-2xl md:text-3xl font-bold text-white">Ton dashboard après le scan</h2>
+                <p className="text-sm md:text-base text-slate-400 max-w-2xl">
+                  {"Chaque prélèvement s'aligne avec logo, montant mensuel/annuel et tag actionnable. Les totaux mensuels et annuels, ainsi que le plan d'économies, sont calculés automatiquement."}
                 </p>
               </div>
             </div>
             <div className="relative overflow-hidden rounded-3xl border border-slate-800/60 bg-slate-900/80 shadow-2xl">
               <Image
                 src="/example.png"
-                alt="Aperçu SubScanner montrant la liste d&apos;abonnements détectés et les totaux mensuels/annuels"
+                alt="Aperçu SubScanner montrant la liste d'abonnements détectés et les totaux mensuels/annuels"
                 width={1024}
                 height={531}
                 className="w-full h-auto"
@@ -201,7 +200,7 @@ export default function Home() {
             </p>
             <h2 className="text-3xl font-bold tracking-tight text-white">On rassure tout de suite</h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              Avant même d&apos;uploader ton fichier, tu sais exactement ce que SubScanner voit (et surtout ce qu&apos;il ne voit pas).
+              {"Avant même d'uploader ton fichier, tu sais exactement ce que SubScanner voit (et surtout ce qu'il ne voit pas)."}
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
@@ -329,7 +328,7 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2 text-white">Plan d&apos;économies</h3>
+                <h3 className="text-lg font-semibold mb-2 text-white">{"Plan d'économies"}</h3>
                 <p className="text-sm text-slate-400 leading-relaxed">
                   Calcul en temps réel de combien tu récupères par an en coupant les abos inutiles.
                 </p>
@@ -359,7 +358,7 @@ export default function Home() {
               <div className="relative space-y-8">
                 <div className="text-center">
                   <h3 className="text-2xl font-bold text-white mb-2">SubScanner est 100% gratuit</h3>
-                  <p className="text-slate-400">Pas de paiement, pas d&apos;abonnement caché, pas de piège</p>
+                  <p className="text-slate-400">{"Pas de paiement, pas d'abonnement caché, pas de piège"}</p>
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-6">
