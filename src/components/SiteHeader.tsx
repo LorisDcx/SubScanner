@@ -11,13 +11,13 @@ export function SiteHeader() {
 
   const navLinks = user
     ? [
-        { href: "/analyze", label: "Scanner" },
+        { href: "/analyze", label: "Scanner mon relevé" },
         { href: "/tuto", label: "Tuto CSV" },
         { href: "/dashboard", label: "Dashboard" },
         { href: "/feedback-netlify", label: "Contact" },
       ]
     : [
-        { href: "/analyze", label: "Scanner" },
+        { href: "/analyze", label: "Scanner mon relevé" },
         { href: "/tuto", label: "Tuto CSV" },
         { href: "/login", label: "Connexion" },
       ];
@@ -71,12 +71,10 @@ export function SiteHeader() {
             {user ? (
               <>
                 <Link
-                  href="/dashboard"
-                  className={`relative rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-5 py-2 text-sm font-semibold text-white hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 hover:scale-105 ${
-                    isActive("/dashboard") ? "ring-2 ring-emerald-200/60" : ""
-                  }`}
+                  href="/analyze"
+                  className="relative rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-5 py-2 text-sm font-semibold text-white hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 hover:scale-105"
                 >
-                  Mon compte
+                  Scanner mon relevé
                 </Link>
                 <button
                   type="button"
@@ -88,10 +86,10 @@ export function SiteHeader() {
               </>
             ) : (
               <Link
-                href="/signup"
+                href="/analyze"
                 className="relative rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-5 py-2 text-sm font-semibold text-white hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 hover:scale-105"
               >
-                Créer un compte
+                Scanner mon relevé
               </Link>
             )}
           </div>

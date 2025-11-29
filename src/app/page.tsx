@@ -1,7 +1,35 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { SiteHeader } from "@/components/SiteHeader";
+
+const faqs = [
+  {
+    question: "Est-ce que tu vois mon nom / IBAN ?",
+    answer: "Non. SubScanner lit uniquement les colonnes Date, Libellé et Montant. Les infos perso ne sont jamais demandées ni affichées.",
+  },
+  {
+    question: "Puis-je supprimer les colonnes sensibles avant ?",
+    answer: (
+      <>
+        Oui. Tu peux enlever les colonnes IBAN, solde ou adresse avant d&apos;uploader.
+        {" "}
+        <Link href="/tuto" className="text-emerald-300 underline-offset-2 hover:text-emerald-200 hover:underline">
+          On te montre la marche à suivre banque par banque.
+        </Link>
+      </>
+    ),
+  },
+  {
+    question: "Est-ce que tu sauvegardes mon fichier ?",
+    answer: "Non. Le CSV est traité en mémoire, rien n&apos;est stocké côté serveur et tu pouvais fermer l&apos;onglet après l&apos;analyse.",
+  },
+  {
+    question: "Pourquoi tu ne demandes pas de connexion bancaire ?",
+    answer: "Parce qu&apos;on veut t&apos;éviter la paperasse et garder un mode anonymisé. Tu restes totalement en contrôle du fichier que tu partages.",
+  },
+];
 
 export default function Home() {
   return (
@@ -15,7 +43,7 @@ export default function Home() {
 
       <SiteHeader />
 
-      <main className="relative mx-auto max-w-7xl px-6 py-16 pb-24 space-y-32">
+      <main className="relative mx-auto max-w-7xl px-6 py-16 pb-36 space-y-32">
         {/* Hero Section - Centered */}
         <section className="text-center space-y-10 max-w-5xl mx-auto">
           <div className="space-y-6">
@@ -28,14 +56,18 @@ export default function Home() {
             </div>
             
             <h1 className="text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl xl:text-8xl">
-              Découvre combien tu
+              Scanne 6 mois de relevés,
               <span className="block mt-3 bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">
-                brûles en abonnements
+                trouve tous tes abonnements et vois combien tu peux économiser par an.
               </span>
             </h1>
             
             <p className="text-xl text-slate-300 md:text-2xl max-w-3xl mx-auto leading-relaxed">
-              Upload ton relevé bancaire CSV. Notre IA détecte automatiquement tous tes prélèvements récurrents et calcule tes économies potentielles.
+              Upload ton CSV bancaire, notre IA détecte automatiquement tous tes prélèvements récurrents, regroupe les montants et calcule tes économies potentielles.
+            </p>
+
+            <p className="text-base text-emerald-200">
+              En moyenne, les premiers utilisateurs récupèrent 48 € par mois d&apos;abonnements inutiles.
             </p>
           </div>
           
@@ -47,7 +79,7 @@ export default function Home() {
                 className="group relative rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-10 py-5 text-lg font-bold text-white hover:shadow-2xl hover:shadow-emerald-500/40 transition-all duration-300 hover:scale-105"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Scanner mon compte
+                  Scanner mon relevé
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
@@ -55,10 +87,11 @@ export default function Home() {
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity blur" />
               </Link>
               <Link
-                href="/tuto"
+                href="/exemple-subscanner.csv"
+                download
                 className="rounded-full border border-slate-700/70 px-10 py-5 text-sm font-semibold text-slate-100 hover:border-slate-500 hover:bg-slate-900/40 transition-all"
               >
-                Comprendre le CSV parfait
+                Voir un exemple
               </Link>
               <div className="flex items-center gap-2 text-sm text-slate-400">
                 <svg className="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,8 +101,12 @@ export default function Home() {
               </div>
             </div>
             
-            <p className="text-sm text-slate-400">
-              Première fois ? On t&apos;explique comment exporter un CSV propre depuis ta banque.
+            <p className="text-sm text-slate-400 max-w-2xl mx-auto">
+              2 minutes pour exporter ton CSV depuis ta banque —
+              {" "}
+              <Link href="/tuto" className="text-emerald-300 underline-offset-2 hover:text-emerald-200 hover:underline">
+                on te montre comment, banque par banque.
+              </Link>
             </p>
           </div>
 
@@ -127,8 +164,58 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Dashboard preview */}
+        <section className="relative max-w-5xl mx-auto">
+          <div className="absolute -inset-1 rounded-[32px] bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-violet-500/20 blur-3xl opacity-50" />
+          <div className="relative rounded-[32px] border border-slate-800/60 bg-slate-950/70 backdrop-blur-xl p-8 md:p-10 space-y-8">
+            <div className="space-y-4 text-center md:text-left">
+              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200 ring-1 ring-emerald-500/30">
+                Aperçu réel
+              </div>
+              <div className="space-y-3">
+                <h2 className="text-3xl font-bold text-white">À quoi ressemble le dashboard ?</h2>
+                <p className="text-base text-slate-400 max-w-2xl">
+                  Chaque abonnement détecté apparaît avec logo, libellé, montant mensuel/annuel et un tag &quot;À garder / À vérifier / À résilier&quot;.
+                  Tu vois immédiatement tes totaux mensuels/annuels et le plan d&apos;économies potentiel.
+                </p>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-3xl border border-slate-800/60 bg-slate-900/80 shadow-2xl">
+              <Image
+                src="/example.png"
+                alt="Aperçu SubScanner montrant la liste d&apos;abonnements détectés et les totaux mensuels/annuels"
+                width={1024}
+                height={531}
+                className="w-full h-auto"
+                priority
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faq" className="max-w-5xl mx-auto space-y-8">
+          <div className="text-center space-y-3">
+            <p className="inline-flex items-center gap-2 rounded-full bg-slate-900/60 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 border border-slate-800/60">
+              Sécurité & vie privée
+            </p>
+            <h2 className="text-3xl font-bold tracking-tight text-white">On rassure tout de suite</h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Avant même d&apos;uploader ton fichier, tu sais exactement ce que SubScanner voit (et surtout ce qu&apos;il ne voit pas).
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {faqs.map((faq) => (
+              <div key={faq.question} className="rounded-2xl border border-slate-800/60 bg-slate-900/70 p-6 space-y-3">
+                <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
+                <p className="text-sm text-slate-300 leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* How it works */}
-        <section className="max-w-4xl mx-auto">
+        <section id="how-it-works" className="max-w-4xl mx-auto">
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-violet-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500 opacity-50 group-hover:opacity-75" />
             <div className="relative space-y-6 rounded-3xl border border-slate-700/50 bg-slate-900/90 backdrop-blur-xl p-10 shadow-2xl">
@@ -352,7 +439,7 @@ export default function Home() {
                     href="/analyze"
                     className="inline-flex items-center gap-2 rounded-full border border-slate-700 px-6 py-3 text-sm font-semibold text-white hover:border-slate-600 hover:bg-slate-800/50 transition-all"
                   >
-                    Essayer sans compte
+                    Scanner mon relevé
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
@@ -373,6 +460,13 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      <Link
+        href="/analyze"
+        className="md:hidden fixed bottom-4 left-1/2 z-40 w-[calc(100%-2.5rem)] -translate-x-1/2 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-4 text-center text-base font-semibold text-white shadow-2xl shadow-emerald-500/30"
+      >
+        Scanner mon relevé
+      </Link>
     </div>
   );
 }

@@ -52,7 +52,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li>
                 <Link href="/analyze" className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-1 group">
-                  <span>Scanner mon compte</span>
+                  <span>Scanner mon relevé</span>
                   <svg className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -182,8 +182,8 @@ export function Footer() {
           <p className="text-sm text-slate-500">
             © {currentYear} SubScanner. Tous droits réservés.
           </p>
-          <p className="text-xs text-slate-600">
-            Fait avec 💚 pour les 20-35 ans
+          <p className="text-xs text-slate-500 text-center sm:text-right">
+            Construit avec sérieux pour celles et ceux qui veulent arrêter de subir leurs prélèvements.
           </p>
         </div>
       </div>
