@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
@@ -8,6 +9,7 @@ export function SiteHeader() {
   const { user, signOut } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = user
     ? [
@@ -16,7 +18,6 @@ export function SiteHeader() {
         { href: "/feedback-netlify", label: "Contact" },
       ]
     : [
-        { href: "/analyze", label: "Scanner mon relevé" },
         { href: "/tuto", label: "Tuto CSV" },
         { href: "/login", label: "Connexion" },
       ];
@@ -31,6 +32,7 @@ export function SiteHeader() {
   const handleSignOut = async () => {
     try {
       await signOut();
+      setMobileMenuOpen(false);
       router.push("/");
     } catch (error) {
       console.error("Sign out error", error);
@@ -39,16 +41,19 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6 py-3 sm:py-5">
+        {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-slate-950 font-bold text-sm">
             S
           </div>
-          <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+          <span className="text-lg sm:text-xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
             SubScanner
           </span>
         </Link>
-        <nav className="flex items-center gap-6 text-sm">
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6 text-sm">
           {navLinks.map((link) => {
             const active = isActive(link.href);
             return (
@@ -65,8 +70,6 @@ export function SiteHeader() {
           })}
 
           <div className="flex items-center gap-4">
-
-
             {user ? (
               <>
                 <Link
@@ -93,7 +96,68 @@ export function SiteHeader() {
             )}
           </div>
         </nav>
+
+        {/* Mobile: CTA + Burger */}
+        <div className="flex md:hidden items-center gap-2">
+          <Link
+            href="/analyze"
+            className="rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-3 py-1.5 text-xs font-semibold text-white"
+          >
+            Scanner
+          </Link>
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            aria-label="Menu"
+          >
+            {mobileMenuOpen ? (
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t border-slate-800/60 bg-slate-950/95 backdrop-blur-xl">
+          <nav className="flex flex-col px-4 py-3 space-y-1">
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`px-3 py-2.5 rounded-lg font-medium transition-colors ${
+                    active 
+                      ? "text-white bg-slate-800/50" 
+                      : "text-slate-400 hover:text-white hover:bg-slate-800/30"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+            
+            {user && (
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="px-3 py-2.5 rounded-lg text-left font-medium text-rose-400 hover:bg-slate-800/30 transition-colors"
+              >
+                Déconnexion
+              </button>
+            )}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
