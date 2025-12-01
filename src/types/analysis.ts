@@ -1,3 +1,5 @@
+import { SubscriptionCategoryId } from "./category";
+
 export type SubscriptionTag = "GARDER" | "RESILIER" | "A_VERIFIER";
 
 export type Subscription = {
@@ -11,6 +13,7 @@ export type Subscription = {
   displayName?: string;
   logo?: string;
   website?: string;
+  category?: SubscriptionCategoryId;
 };
 
 export type AnalysisResult = {

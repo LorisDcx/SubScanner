@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const LAST_UPDATED = "23 novembre 2025";
+const LAST_UPDATED = "1er décembre 2025";
 
 export default function TermsPage() {
   return (
@@ -115,6 +115,12 @@ export default function TermsPage() {
                 </svg>
                 <span>Recommandations pour catégoriser ou marquer les abonnements à résilier.</span>
               </li>
+              <li className="flex items-start gap-3 text-slate-300">
+                <svg className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Comparateur d&apos;offres alternatives pour trouver des services moins chers ou mieux adaptés.</span>
+              </li>
             </ul>
             <div className="pt-4 border-t border-slate-800/50">
               <p className="text-slate-300 leading-relaxed">
@@ -217,9 +223,58 @@ export default function TermsPage() {
             </div>
           </section>
 
+          <section className="rounded-2xl border border-sky-500/20 bg-sky-500/5 backdrop-blur-sm p-8">
+            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+              <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-sky-500/20 text-sky-300 text-lg font-bold">6</span>
+              Comparateur et liens affiliés
+            </h2>
+            <div className="space-y-4">
+              <p className="text-slate-200 leading-relaxed font-semibold">
+                <span className="text-sky-400">📊 Transparence :</span> SubScanner propose un comparateur d&apos;offres partenaires.
+              </p>
+              <ul className="space-y-3 mt-4">
+                <li className="flex items-start gap-3 text-slate-300">
+                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span><span className="text-white font-semibold">Classement objectif :</span> les offres sont triées par prix mensuel croissant par défaut.</span>
+                </li>
+                <li className="flex items-start gap-3 text-slate-300">
+                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span><span className="text-white font-semibold">Liens affiliés :</span> certaines offres contiennent des liens affiliés. Si vous souscrivez via ces liens, SubScanner peut percevoir une commission de la part du partenaire.</span>
+                </li>
+                <li className="flex items-start gap-3 text-slate-300">
+                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span><span className="text-white font-semibold">Sans surcoût :</span> le prix affiché est identique que vous passiez par notre lien ou directement sur le site du partenaire.</span>
+                </li>
+                <li className="flex items-start gap-3 text-slate-300">
+                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span><span className="text-white font-semibold">Indépendance :</span> l&apos;existence d&apos;un partenariat n&apos;influence pas le classement ni la sélection des offres.</span>
+                </li>
+                <li className="flex items-start gap-3 text-slate-300">
+                  <svg className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  <span><span className="text-white font-semibold">Non exhaustif :</span> le comparateur ne référence qu&apos;une partie des offres du marché.</span>
+                </li>
+              </ul>
+              <div className="pt-4 border-t border-slate-800/50">
+                <p className="text-slate-400 text-sm">
+                  Les liens affiliés sont clairement identifiés par la mention « lien affilié » à proximité du bouton.
+                </p>
+              </div>
+            </div>
+          </section>
+
           <section className="rounded-2xl border border-slate-800/50 bg-slate-900/30 backdrop-blur-sm p-8">
             <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-              <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 text-lg font-bold">6</span>
+              <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 text-lg font-bold">7</span>
               Responsabilité
             </h2>
             <p className="text-slate-300 leading-relaxed">
@@ -244,7 +299,7 @@ export default function TermsPage() {
 
           <section className="rounded-2xl border border-slate-800/50 bg-slate-900/30 backdrop-blur-sm p-8">
             <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-              <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 text-lg font-bold">8</span>
+              <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 text-lg font-bold">9</span>
               Évolution du service
             </h2>
             <p className="text-slate-300 leading-relaxed">
@@ -256,7 +311,7 @@ export default function TermsPage() {
 
           <section className="rounded-2xl border border-slate-800/50 bg-slate-900/30 backdrop-blur-sm p-8">
             <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-              <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 text-lg font-bold">9</span>
+              <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 text-lg font-bold">10</span>
               Droit applicable
             </h2>
             <p className="text-slate-300 leading-relaxed">
@@ -267,7 +322,7 @@ export default function TermsPage() {
 
           <section className="rounded-2xl border border-slate-800/50 bg-slate-900/30 backdrop-blur-sm p-8">
             <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-              <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-pink-500/10 text-pink-400 text-lg font-bold">10</span>
+              <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-pink-500/10 text-pink-400 text-lg font-bold">11</span>
               Contact
             </h2>
             <div className="space-y-3 text-slate-300">

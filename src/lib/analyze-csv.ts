@@ -1,5 +1,6 @@
 import { AnalysisResult, Subscription } from "@/types/analysis";
-import { getDisplayName, getLogoPath, getWebsite } from "./brand-mapping";
+import { SubscriptionCategoryId } from "@/types/category";
+import { getDisplayName, getLogoPath, getWebsite, getCategory } from "./brand-mapping";
 
 type RawOperation = {
   [key: string]: string;
@@ -684,6 +685,7 @@ export function analyzeCsv(content: string): AnalysisResult {
     const displayName = getDisplayName(lastOperation.labelRaw, labelNormalized);
     const logo = getLogoPath(lastOperation.labelRaw, labelNormalized);
     const website = getWebsite(lastOperation.labelRaw, labelNormalized);
+    const category = getCategory(lastOperation.labelRaw, labelNormalized);
 
     const sub: Subscription = {
       id: `${labelNormalized}-${lastOperation.date.getTime()}`,
@@ -695,6 +697,7 @@ export function analyzeCsv(content: string): AnalysisResult {
       displayName,
       logo: logo ?? undefined,
       website: website ?? undefined,
+      category: (category as SubscriptionCategoryId) ?? undefined,
     };
 
     subscriptions.push(sub);
@@ -716,6 +719,7 @@ export function analyzeCsv(content: string): AnalysisResult {
       const displayName = getDisplayName(lastOperation.labelRaw, labelNormalized);
       const logo = getLogoPath(lastOperation.labelRaw, labelNormalized);
       const website = getWebsite(lastOperation.labelRaw, labelNormalized);
+      const category = getCategory(lastOperation.labelRaw, labelNormalized);
 
       const fallbackSub: Subscription = {
         id: `${labelNormalized}-${lastOperation.date.getTime()}-fallback`,
@@ -727,6 +731,7 @@ export function analyzeCsv(content: string): AnalysisResult {
         displayName,
         logo: logo ?? undefined,
         website: website ?? undefined,
+        category: (category as SubscriptionCategoryId) ?? undefined,
       };
 
       subscriptions.push(fallbackSub);

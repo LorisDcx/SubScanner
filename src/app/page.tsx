@@ -43,6 +43,11 @@ export default function Home() {
 
       <SiteHeader />
 
+      {/* Impact Affiliate Verification */}
+      <div className="sr-only" aria-hidden="true">
+        Impact-Site-Verification: 03d95d9b-3156-4c86-bc15-2cdb95afbad6
+      </div>
+
       <main className="relative mx-auto max-w-7xl px-6 py-16 pb-36 space-y-32">
         {/* Hero Section - Centered */}
         <section className="text-center space-y-10 max-w-5xl mx-auto">

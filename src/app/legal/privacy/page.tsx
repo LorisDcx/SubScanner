@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const LAST_UPDATED = "23 novembre 2025";
+const LAST_UPDATED = "1er décembre 2025";
 
 export default function PrivacyPage() {
   return (
@@ -248,9 +248,56 @@ export default function PrivacyPage() {
               </li>
               <li className="flex items-start gap-3 text-slate-300">
                 <span className="text-violet-400 font-bold">→</span>
+                <span><span className="text-white font-semibold">Partenaires affiliés :</span> uniquement si vous cliquez sur un lien affilié (tracking de conversion, sans données personnelles)</span>
+              </li>
+              <li className="flex items-start gap-3 text-slate-300">
+                <span className="text-violet-400 font-bold">→</span>
                 <span><span className="text-white font-semibold">Autorités légales :</span> si requis par la loi</span>
               </li>
             </ul>
+          </section>
+
+          <section className="rounded-2xl border border-sky-500/20 bg-sky-500/5 backdrop-blur-sm p-8">
+            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+              <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-sky-500/20 text-sky-300 text-lg font-bold">5b</span>
+              Liens affiliés et comparateur
+            </h2>
+            <div className="space-y-4">
+              <p className="text-slate-200 leading-relaxed">
+                SubScanner propose un comparateur d&apos;offres partenaires. Certains liens sont des <span className="text-white font-semibold">liens affiliés</span> :
+              </p>
+              <ul className="space-y-3 mt-4">
+                <li className="flex items-start gap-3 text-slate-300">
+                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Si vous souscrivez via ces liens, SubScanner peut percevoir une commission du partenaire.</span>
+                </li>
+                <li className="flex items-start gap-3 text-slate-300">
+                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Le prix est identique pour vous (aucun surcoût).</span>
+                </li>
+                <li className="flex items-start gap-3 text-slate-300">
+                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Les liens affiliés sont clairement identifiés dans l&apos;interface.</span>
+                </li>
+                <li className="flex items-start gap-3 text-slate-300">
+                  <svg className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Les partenaires peuvent collecter des données de tracking (cookie affilié) uniquement lors du clic.</span>
+                </li>
+              </ul>
+              <div className="pt-4 border-t border-slate-800/50">
+                <p className="text-slate-400 text-sm">
+                  L&apos;existence d&apos;un partenariat n&apos;influence ni le classement ni la sélection des offres.
+                </p>
+              </div>
+            </div>
           </section>
 
           <section className="rounded-2xl border border-slate-800/50 bg-slate-900/30 backdrop-blur-sm p-8">
