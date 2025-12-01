@@ -11,7 +11,6 @@ export function SiteHeader() {
 
   const navLinks = user
     ? [
-        { href: "/analyze", label: "Scanner mon relevé" },
         { href: "/tuto", label: "Tuto CSV" },
         { href: "/dashboard", label: "Dashboard" },
         { href: "/feedback-netlify", label: "Contact" },
